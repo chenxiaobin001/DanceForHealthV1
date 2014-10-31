@@ -73,6 +73,7 @@ public class LoadingScreenActivity extends Activity{
 			Log.v("loading", "created data file");
 		}
 		// set fonts
+/*
 		welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
 		Typeface font = Typeface.createFromAsset(getAssets(), "KOMIKAX_.ttf");
 		Typeface font_two = Typeface.createFromAsset(getAssets(),
@@ -89,8 +90,10 @@ public class LoadingScreenActivity extends Activity{
 				 + calculateWeightLoss() + " pounds!\nWork out for " +
 				minutesUntilNext + " more minutes to level up!");
 		levelTextView.setTypeface(font_two);
+*/
 		//leveltxt.setTyp
 		timer.start();
+
 	}
 	
 	
