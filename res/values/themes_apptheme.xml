@@ -9,7 +9,7 @@
 
     <item name="android:editTextStyle">@style/EditTextAppTheme</item>
 
-    <item name="android:textColorHighlight">#9933b5e5</item>
+    <item name="android:textColorHighlight">#990099cc</item>
 
     <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewAppTheme</item>
 

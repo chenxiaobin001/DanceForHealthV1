@@ -22,9 +22,8 @@
         android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/welcomeTextView"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="29dp"
         android:orientation="vertical" >
 
         <Button
@@ -34,6 +33,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
+            android:textColor="#ffffff"
             android:onClick="onPrevButtonClick"
             android:text="@string/previous_workout_button" />
 
@@ -44,6 +44,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
+            android:textColor="#ffffff"
             android:onClick="onNewButtonClick"
             android:text="@string/new_workout_button" />
 
@@ -54,6 +55,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
+            android:textColor="#ffffff"
             android:onClick="onProgressButtonClick"
             android:text="@string/show_progress_button" />
     </LinearLayout>

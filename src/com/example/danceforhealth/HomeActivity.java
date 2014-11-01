@@ -40,13 +40,13 @@ public class HomeActivity extends Activity {
 		preWorkoutButton = (Button) findViewById(R.id.preWorkoutButton);
 		//Button d = (Button) findViewById(R.id.dummy); <- uncomment this for testing
 		showProgressButton = (Button) findViewById(R.id.showProgressButton);
-		Typeface komikaFont1 = Typeface.createFromAsset(getAssets(), "KOMIKAX_.ttf");
-		Typeface komikaFont2 = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
-		welcomeTextView.setTypeface(komikaFont1);
-		newWorkoutButton.setTypeface(komikaFont2);
-		preWorkoutButton.setTypeface(komikaFont2);
+//		Typeface komikaFont1 = Typeface.createFromAsset(getAssets(), "KOMIKAX_.ttf");
+//		Typeface komikaFont2 = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
+//		welcomeTextView.setTypeface(komikaFont1);
+//		newWorkoutButton.setTypeface(komikaFont2);
+//		preWorkoutButton.setTypeface(komikaFont2);
 		//d.setTypeface(font_two); <- uncomment this for testing
-		showProgressButton.setTypeface(komikaFont2);
+//		showProgressButton.setTypeface(komikaFont2);
 	}
 
 	@Override
