@@ -52,6 +52,7 @@ public class LoadingScreenActivity extends Activity{
 			@Override
 			public void onFinish() {
 				startActivity(i);
+				finish();
 			}
 			
 		};
