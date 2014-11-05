@@ -12,10 +12,12 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 public class NewWorkoutPageSwipe extends ActionBarActivity {
-	ViewPager viewPager = null;
-	PagerTitleStrip titleStrip = null;
+	private ViewPager viewPager = null;
+	private PagerTitleStrip titleStrip = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Log.v("before_view", "afsdfdsf");
@@ -69,7 +71,7 @@ public class NewWorkoutPageSwipe extends ActionBarActivity {
 					break;
 				}
 				case 2:{
-					fragment = new FragmentC();
+					fragment = new FragmentHeartRate();
 					break;
 				}
 			}
@@ -95,7 +97,7 @@ public class NewWorkoutPageSwipe extends ActionBarActivity {
 					break;
 				}
 				case 2:{
-					title = "Heart Rate";
+					title = "HeartRate";
 					break;
 				}
 			}
