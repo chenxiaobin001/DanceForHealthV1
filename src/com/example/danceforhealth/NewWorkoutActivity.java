@@ -46,7 +46,7 @@ public class NewWorkoutActivity extends Activity implements OnItemSelectedListen
 		if(!workout.getType().equals("")) {
 			setSpinnerSelection(workout.getType(), spinner);
 		}
-		EditText edittext = (EditText) findViewById(R.id.editText);
+		EditText edittext = (EditText) findViewById(R.id.editText_new);
 		String time = Integer.toString(workout.getTime());
 		edittext.setText(time);
 
@@ -69,7 +69,7 @@ public class NewWorkoutActivity extends Activity implements OnItemSelectedListen
 	
 	public void onNextButtonClick(View view) {
 		
-		EditText edittext = (EditText) findViewById(R.id.editText);
+		EditText edittext = (EditText) findViewById(R.id.editText_new);
 		int time = Integer.parseInt(edittext.getText().toString());
 		Log.v("new workout", "time = " + time);
 		workout.setType(selection);

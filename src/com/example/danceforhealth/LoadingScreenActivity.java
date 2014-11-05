@@ -93,8 +93,7 @@ public class LoadingScreenActivity extends Activity{
 		levelTextView.setTypeface(font_two);
 */
 		//leveltxt.setTyp
-		timer.start();
-
+		timer.start();	
 	}
 	
 	
