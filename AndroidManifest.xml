@@ -81,6 +81,10 @@
             android:name=".NewWorkoutPageSwipe"
             android:label="@string/title_activity_new_workout_page_swipe" >
         </activity>
+        <activity
+            android:name=".FragmentWeightAndStep"
+            android:label="@string/title_activity_fragment_weight_and_step" >
+        </activity>
     </application>
 
 </manifest>

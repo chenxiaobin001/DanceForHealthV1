@@ -65,7 +65,7 @@ public class NewWorkoutPageSwipe extends ActionBarActivity {
 					break;
 				}
 				case 1: {
-					fragment = new FragmentB();
+					fragment = new FragmentWeightAndStep();
 					break;
 				}
 				case 2:{

@@ -42,5 +42,6 @@
     <string name="question_minutes_text_view">How many minutes did you do it for?</string>
     <string name="next_page_button">Next Page</string>
     <string name="title_activity_new_workout_page_swipe">NewWorkoutPageSwipe</string>
+    <string name="title_activity_fragment_weight_and_step">FragmentWeightAndStep</string>
 
 </resources>

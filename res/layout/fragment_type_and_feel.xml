@@ -15,8 +15,8 @@
             android:id="@+id/workoutTypeTextView_v1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:text="@string/question_workout_type_text_view"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -25,8 +25,8 @@
             android:id="@+id/workoutTypeSpinner_v1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -41,8 +41,8 @@
             android:id="@+id/instructionTextView_v1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:text="@string/rating_header"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="15sp" />
@@ -51,8 +51,8 @@
             android:id="@+id/likeTextView_v1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:text="How much do you like doing the workout?"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -60,8 +60,8 @@
             android:id="@+id/radioGroup1_v1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:orientation="horizontal" >
 
             <RadioButton
@@ -112,8 +112,8 @@
             android:id="@+id/funTextView_v1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:text="How much fun is the workout?"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -121,8 +121,8 @@
             android:id="@+id/RadioGroup01_v1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:orientation="horizontal" >
 
             <RadioButton
@@ -173,8 +173,8 @@
             android:id="@+id/tiredTextView_v1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:text="How tired does it make you?"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -182,8 +182,8 @@
             android:id="@+id/RadioGroup04_v1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:orientation="horizontal" >
 
             <RadioButton
@@ -244,17 +244,17 @@
             android:id="@+id/minutesTextView_v1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:text="@string/question_minutes_text_view"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
             android:id="@+id/editText_v1"
-            android:layout_width="wrap_content"
+            android:layout_width="78dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:ems="6"
             android:inputType="number" >
 
