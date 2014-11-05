@@ -3,15 +3,19 @@ package com.example.danceforhealth;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class NewWorkoutPageSwipe extends ActionBarActivity {
 	ViewPager viewPager = null;
+	PagerTitleStrip titleStrip = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Log.v("before_view", "afsdfdsf");
@@ -19,6 +23,9 @@ public class NewWorkoutPageSwipe extends ActionBarActivity {
 		setContentView(R.layout.activity_new_workout_page_swipe);
 		Log.v("after_view", "awefsdf");
 		viewPager = (ViewPager) findViewById(R.id.pager);	
+		titleStrip = (PagerTitleStrip) findViewById(R.id.titleStrip);
+		titleStrip.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+		titleStrip.setTextColor(Color.WHITE);
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		viewPager.setAdapter(new MyAdapter(fragmentManager));
 	}
@@ -54,7 +61,7 @@ public class NewWorkoutPageSwipe extends ActionBarActivity {
 			Fragment fragment = null;
 			switch (i){
 				case 0: {
-					fragment = new FragmentA();
+					fragment = new FragmentTypeAndFeel();
 					break;
 				}
 				case 1: {
@@ -80,15 +87,15 @@ public class NewWorkoutPageSwipe extends ActionBarActivity {
 			String title = new String();
 			switch (position){
 				case 0: {
-					title = "tab1";
+					title = "Type/Feel";
 					break;
 				}
 				case 1: {
-					title = "tab2";
+					title = "Weight/Step";
 					break;
 				}
 				case 2:{
-					title = "tab3";
+					title = "Heart Rate";
 					break;
 				}
 			}
