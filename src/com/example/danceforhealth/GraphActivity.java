@@ -20,15 +20,12 @@ public class GraphActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_graph);
 		
-		Typeface font_two = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
+
 		backButton = (Button) findViewById(R.id.back);
 		weekButton = (Button) findViewById(R.id.week);
 		monthButton = (Button) findViewById(R.id.month);
 		yeatButton = (Button) findViewById(R.id.year);
-		backButton.setTypeface(font_two);
-		weekButton.setTypeface(font_two);
-		monthButton.setTypeface(font_two);
-		yeatButton.setTypeface(font_two);
+
 	}
 
 	@Override

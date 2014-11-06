@@ -30,13 +30,11 @@ public class WorkoutSummary extends Activity{
 			workout = (Workout) b.get("workout");
 		workout = b.getParcelable("workout");
 
-		Typeface font = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
+
 		headerTextView = (TextView) findViewById(R.id.Header);
 		updateButton = (Button) findViewById(R.id.updateButton);
 		homeButton = (Button) findViewById(R.id.homeButton);
-		headerTextView.setTypeface(font);
-		updateButton.setTypeface(font);
-		homeButton.setTypeface(font);
+
 		
 		String feel ;
 		

@@ -36,11 +36,8 @@ public void onCreate(Bundle icicle) {
     setListAdapter(adapter);
     
     // set font
-	Typeface font_two = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
 	TextView t = (TextView) findViewById(R.id.textView1);
 	Button b = (Button) findViewById(R.id.preWorkoutButton);
-	t.setTypeface(font_two);
-	b.setTypeface(font_two);
   }
   
 	public void onBackButtonClick(View view) {

@@ -25,6 +25,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="15dp"
             android:onClick="onWeekButtonClick"
+            android:textColor="#ffffff"
             android:text="View This Week&apos;s Progress" />
 
         <Button
@@ -34,6 +35,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="15dp"
             android:onClick="onMonthButtonClick"
+            android:textColor="#ffffff"
             android:text="View This Month&apos;s Progress" />
 
         <Button
@@ -43,6 +45,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="15dp"
             android:onClick="onYearButtonClick"
+            android:textColor="#ffffff"
             android:text="View This Year&apos;s Progress" />
 
         <Button
@@ -51,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:onClick="onBackButtonClick"
+            android:textColor="#ffffff"
             android:text="@string/back" />
     </LinearLayout>
 
