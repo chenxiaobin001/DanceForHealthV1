@@ -85,6 +85,7 @@
 	                android:layout_height="wrap_content"
 	                android:hint="beats number"
 	                android:imeOptions="actionSend"
+	                android:text="0"
 	                android:inputType="number" >
 	
 	                <requestFocus />

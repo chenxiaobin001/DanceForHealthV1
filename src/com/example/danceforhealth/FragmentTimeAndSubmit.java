@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -80,6 +81,8 @@ public class FragmentTimeAndSubmit extends Fragment implements FragmentDataColle
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				communicator.collectData(new Workout());
+				Intent intent = new Intent(getActivity(), HomeActivity.class);
+				startActivity(intent);
 			}
 		});
 		

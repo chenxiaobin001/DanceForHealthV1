@@ -1,7 +1,10 @@
 package com.example.danceforhealth;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.Gson;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,6 +24,9 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 	private PagerTitleStrip titleStrip = null;
 	private MyAdapter myAdapter = null;
 	private Workout workout = null;
+	PrevWorkout preWorkout = PrevWorkout.getInstance();
+	List<Workout> workouts = preWorkout.getPrevious();
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -88,9 +94,28 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 			FragmentDataCollection fragment = (FragmentDataCollection)myAdapter.getItem(i);
 			fragment.updateWorkoutInfo(workout);
 		}
+		workouts.add(workout);
+		saveDataToFile();
 	}
 	
+	private void saveDataToFile(){
+		
+		Gson gson = new Gson();
+		String file = "data_workout";
 	
+	      try {
+	         FileOutputStream fOut = openFileOutput(file,MODE_WORLD_WRITEABLE);
+	         String data = "";
+	         for (Workout w : workouts){
+	        	 data += gson.toJson(w); 
+	        	 data += "\n";
+	         }
+	         fOut.write(data.getBytes());
+	         fOut.close();
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }
+	}
 
 	class MyAdapter extends FragmentStatePagerAdapter{
 		
