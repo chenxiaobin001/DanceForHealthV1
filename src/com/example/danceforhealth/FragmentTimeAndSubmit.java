@@ -17,23 +17,26 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-public class FragmentTimeAndSubmit extends Fragment{
+public class FragmentTimeAndSubmit extends Fragment implements FragmentDataCollection{
 	
 	private TimePicker timePicker;
 	private Button setTimePickerButton;
 	private Button setDatePickerButton;
+	private Button submitButton;
 	private TextView submitTimeView;
 	private TextView submitDateView;
+	private Communicator communicator;
+	private View fragmentView;
 
-	int month, day;
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
 		View view = inflater.inflate(R.layout.fragment_time_and_submit, container, false);
+		fragmentView = view;
 		Calendar calendar = Calendar.getInstance();
 		timePicker = (TimePicker) view.findViewById(R.id.timePicker1);
 		setTimePickerButton = (Button) view.findViewById(R.id.setTimePicker);
 		setDatePickerButton = (Button) view.findViewById(R.id.setDatePicker);
+		submitButton = (Button) view.findViewById(R.id.dateAndTimeSubmit);
 		submitTimeView = (TextView) view.findViewById(R.id.submitTimeView);
 		submitDateView = (TextView) view.findViewById(R.id.submitDateView);
 		submitTimeView.setText(timePicker.getCurrentHour() + " : " + timePicker.getCurrentMinute());
@@ -70,14 +73,41 @@ public class FragmentTimeAndSubmit extends Fragment{
 			}
 		});
 		
+		
+		submitButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				communicator.collectData(new Workout());
+			}
+		});
+		
 		return view;
 	} 
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState){
+		super.onActivityCreated(savedInstanceState);
+		communicator = (Communicator) getActivity();
+	}
+	
 	
 	private String getFormatDate(int year, int month,
 			int day){
 		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
-		sdf.applyPattern("MMM dd, yyyy");
+		sdf.applyPattern("E  MMM/dd/yyyy");
 		Date date = new Date(year - 1900, month, day);
 		return sdf.format(date);
+	}
+	
+	@Override
+	public void updateWorkoutInfo(Workout workout) {
+		
+		String workoutDate = (String) submitDateView.getText();
+		String workoutTime = (String) submitTimeView.getText();
+		workout.setDate(workoutDate);
+		workout.setWorkoutTime(workoutTime);
+		
 	}
 }

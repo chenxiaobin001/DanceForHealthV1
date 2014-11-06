@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class FragmentHeartRate extends Fragment{
+public class FragmentHeartRate extends Fragment implements FragmentDataCollection{
 	
 	private EditText edittext;
 	private TextView textview;
@@ -22,10 +22,12 @@ public class FragmentHeartRate extends Fragment{
 	private TextView heartRateTextView;
 	private Button viewSummaryButton;
 	private CountDownTimer timer;
+	private View fragmentView;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
 		View view = inflater.inflate(R.layout.fragment_heartrate, container, false);
+		fragmentView = view;
 		heartRateTextView = (TextView)view.findViewById(R.id.heartRateTextView_v1);
 		textview = (TextView)view.findViewById(R.id.timerTextView_v1);
 		edittext = (EditText)view.findViewById(R.id.heartRateEditText_v1);
@@ -75,4 +77,11 @@ public class FragmentHeartRate extends Fragment{
 		return view;
 	} 
 
+	@Override
+	public void updateWorkoutInfo(Workout workout) {
+		
+		String input = edittext.getText().toString();
+		int heartrate = Integer.parseInt(input) * 4;
+		workout.setHeartrate(heartrate);
+	}
 }

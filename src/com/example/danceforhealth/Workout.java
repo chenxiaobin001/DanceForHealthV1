@@ -12,6 +12,7 @@ public class Workout implements Parcelable {
 	private int steps;
 	private int weight;
 	private String date;
+	private String workoutTime;
 	private int time;
 	private int likedIdx;
 	private int funIdx;
@@ -51,6 +52,7 @@ public class Workout implements Parcelable {
 		setSteps(p.readInt());
 		setWeight(p.readInt());
 		setDate(p.readString());
+		setWorkoutTime(p.readString());
 		setTime(p.readInt());
 		setLikedIndex(p.readInt());
 		setFunIndex(p.readInt());
@@ -59,6 +61,10 @@ public class Workout implements Parcelable {
 
 	public String getDate() {
 		return date;
+	}
+	
+	public String getWorkoutTime() {
+		return workoutTime;	
 	}
 	
 	public boolean getUpdate() {
@@ -191,7 +197,11 @@ public class Workout implements Parcelable {
 	public void setTime(int minutes) {
 		this.time = minutes;
 	}
-
+	
+	public void setWorkoutTime(String workoutTime) {
+		this.workoutTime = workoutTime;	
+	}
+	
 	public void setDate(String date) {
 		this.date = date;
 	}
@@ -228,9 +238,12 @@ public class Workout implements Parcelable {
 		parcel.writeInt(getSteps());
 		parcel.writeInt(getWeight());
 		parcel.writeString(getDate());
+		parcel.writeString(getWorkoutTime());
 		parcel.writeInt(getTime());
 		parcel.writeInt(getLikedIndex());
 		parcel.writeInt(getFunIndex());
 		parcel.writeInt(getTiredIndex());
 	}
+
+	
 }
