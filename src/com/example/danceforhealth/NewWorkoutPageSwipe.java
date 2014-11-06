@@ -74,6 +74,9 @@ public class NewWorkoutPageSwipe extends ActionBarActivity {
 					fragment = new FragmentHeartRate();
 					break;
 				}
+				case 3:{
+					fragment = new FragmentTimeAndSubmit();
+				}
 			}
 			return fragment;
 		}
@@ -81,7 +84,7 @@ public class NewWorkoutPageSwipe extends ActionBarActivity {
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
-			return 3;
+			return 4;
 		}
 		
 		@Override
@@ -99,6 +102,9 @@ public class NewWorkoutPageSwipe extends ActionBarActivity {
 				case 2:{
 					title = "HeartRate";
 					break;
+				}
+				case 3:{
+					title = "Date&Time";
 				}
 			}
 			return title;

@@ -33,7 +33,6 @@
                     android:id="@+id/timerButton_v1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="startTimer"
                     android:text="Start Timer"
                     android:textColor="#ffffff" />
                 
@@ -96,7 +95,6 @@
 	                android:layout_height="wrap_content"
 	                android:layout_alignParentRight="true"
 	                android:layout_alignParentTop="true"
-	                android:onClick="onHRButtonClick"
 	                android:text="Calculate"
 	                android:textColor="#ffffff" />
 			    
