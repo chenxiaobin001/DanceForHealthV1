@@ -57,21 +57,9 @@
         android:layout_marginTop="10dp"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/howToTextView_v1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="How to take your heart rate:"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="1. Using your index and middle fingers, locate your pulse on your wrist, right below your thumb (you should be able to feel a beat)" />
-
+       
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageView_v1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:alpha=".85"

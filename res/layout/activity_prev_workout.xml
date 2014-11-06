@@ -9,49 +9,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".PrevWorkoutActivity" >
 
-    <!--
-         <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-    </LinearLayout>
-    -->
-
-    <ListView>
+   <ListView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content" 
+       android:layout_marginTop="20dp"
+       android:layout_marginLeft="20dp"
+       android:layout_marginRight="20dp">
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/linearLayout1"
             android:layout_centerHorizontal="true"
             android:text="Here are your previous workouts" />
-
-        <ListView>
-        </ListView>
-
-        <!--
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="37dp" />
-        -->
-        <!--
-         <Button
-        android:id="@+id/button1"
-        android:background="@drawable/custom_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/preWorkout"
-        android:layout_centerVertical="true"
-        android:onClick="onViewClick"
-        android:text="View" />
-        -->
 
         <Button
             android:id="@+id/preWorkoutButton"
@@ -60,7 +31,6 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="28dp"
-            android:background="@drawable/custom_button"
             android:onClick="onBackButtonClick"
             android:text="@string/back" />
     </ListView>
