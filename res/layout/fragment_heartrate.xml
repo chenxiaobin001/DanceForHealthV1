@@ -11,7 +11,7 @@
         android:layout_below="@+id/linearLayout3"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:orientation="vertical" >
 
         <TextView
@@ -25,21 +25,32 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-            <Button
-                android:id="@+id/timerButton_v1"
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="startTimer"
-                android:text="Start Timer"
-                android:textColor="#ffffff" />
+                android:layout_height="match_parent" >
 
-            <TextView
-                android:id="@+id/timerTextView_v1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:text="Time left: 15"
-                android:textSize="20sp" />
+                <Button
+                    android:id="@+id/timerButton_v1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="startTimer"
+                    android:text="Start Timer"
+                    android:textColor="#ffffff" />
+                
+                <TextView
+	                android:id="@+id/timerTextView_v1"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="Time left: 15"
+	                android:layout_marginRight="5dp"
+	                android:layout_marginTop="10dp"
+	                android:layout_alignParentRight="true"
+	                android:layout_alignParentTop="true"
+	                android:textSize="20sp" />
+            </RelativeLayout>
+
+            
+            
         </LinearLayout>
     </LinearLayout>
 
@@ -50,7 +61,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/linearLayout1"
         android:orientation="vertical" >
 
@@ -65,26 +76,32 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/linearLayout2"
             android:layout_below="@+id/linearLayout2" >
+			<RelativeLayout
+            	android:layout_width="match_parent"
+            	android:layout_height="match_parent" >
+            	<EditText
+	                android:id="@+id/heartRateEditText_v1"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:hint="beats number"
+	                android:imeOptions="actionSend"
+	                android:inputType="number" >
+	
+	                <requestFocus />
+	            </EditText>
 
-            <EditText
-                android:id="@+id/heartRateEditText_v1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="beats number"
-                android:imeOptions="actionSend"
-                android:inputType="number" >
-
-                <requestFocus />
-            </EditText>
-
-            <Button
-                android:id="@+id/heartRateButton_v1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:onClick="onHRButtonClick"
-                android:text="Calculate"
-                android:textColor="#ffffff" />
+	            <Button
+	                android:id="@+id/heartRateButton_v1"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_alignParentRight="true"
+	                android:layout_alignParentTop="true"
+	                android:onClick="onHRButtonClick"
+	                android:text="Calculate"
+	                android:textColor="#ffffff" />
+			    
+        	</RelativeLayout>
+            
 
         </LinearLayout>
 
@@ -116,8 +133,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="104dp" >
 
             <TextView
                 android:id="@+id/textView_v1"
@@ -130,7 +146,7 @@
                 android:id="@+id/button1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:text="image"
                 android:layout_weight="2"
                 android:textColor="#ffffff" />
