@@ -17,6 +17,10 @@ public class FragmentWeightAndStep extends Fragment implements FragmentDataColle
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
 		View view = inflater.inflate(R.layout.fragment_weight_and_step, container, false);
 		fragmentView = view;
+		Bundle bundle = getArguments();
+		Workout workout = bundle.getParcelable("workout_info");
+		initWorkoutInfo(workout);
+		
 		return view;
 	} 
 	
@@ -41,5 +45,17 @@ public class FragmentWeightAndStep extends Fragment implements FragmentDataColle
 			workout.setWeight(0);
 		}
 		
+	}
+
+
+	@Override
+	public void initWorkoutInfo(Workout workout) {
+		
+		if (workout != null){
+			stepEditText = (EditText) fragmentView.findViewById(R.id.stepEditText_v1);
+			weightEditText = (EditText) fragmentView.findViewById(R.id.weightEditText_v1);
+			stepEditText.setText(Integer.toString(workout.getSteps()));
+			weightEditText.setText(Integer.toString(workout.getWeight()));
+		}
 	}
 }

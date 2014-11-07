@@ -2,6 +2,7 @@ package com.example.danceforhealth;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,12 +28,18 @@ public class FragmentTypeAndFeel extends Fragment implements FragmentDataCollect
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
 		View view = inflater.inflate(R.layout.fragment_type_and_feel, container, false);
 		fragmentView = view;
+		spinner = (Spinner) view.findViewById(R.id.workoutTypeSpinner_v1);
 		rg_liked = (RadioGroup) view.findViewById(R.id.radioGroup1_v1);
 		rg_fun = (RadioGroup) view.findViewById(R.id.RadioGroup01_v1);
 		rg_tired = (RadioGroup) view.findViewById(R.id.RadioGroup04_v1);
-		edittext = (EditText) fragmentView.findViewById(R.id.editText_v1);
+		edittext = (EditText) view.findViewById(R.id.editText_v1);
 		setSpinnerContent(view);
 		selection = "Dance";
+		Bundle bundle = getArguments();
+		Workout workout = bundle.getParcelable("workout_info");
+		initWorkoutInfo(workout);
+		
+		
 		return view;
 	} 
 	
@@ -74,7 +81,8 @@ public class FragmentTypeAndFeel extends Fragment implements FragmentDataCollect
 			}
 			
 		});
-	}
+
+	}	
 	
 
 	@Override
@@ -108,5 +116,38 @@ public class FragmentTypeAndFeel extends Fragment implements FragmentDataCollect
 		workout.setType(selection);
 		workout.setTime(duration);
 		
+	}
+
+	@Override
+	public void initWorkoutInfo(Workout workout) {
+
+		if (workout != null){
+			String type = workout.getType();
+            if (!type.equals(""))
+            	setSpinnerSelection(type, spinner);
+			edittext.setText(Integer.toString(workout.getTime()));
+			rg_liked.check(workout.getLikedIndex());
+			rg_fun.check(workout.getFunIndex());
+			rg_tired.check(workout.getTiredIndex());
+		}
+		
+	}
+	
+	private void setSpinnerSelection(String type, Spinner spinner) {
+		if(type.equals("Dance")) {
+			spinner.setSelection(0);
+		}
+		else if(type.equals("Run")) {
+			spinner.setSelection(1);
+		}
+		else if(type.equals("Walk")) {
+			spinner.setSelection(2);
+		}
+		else if(type.equals("Bike")) {
+			spinner.setSelection(3);
+		}
+		else if(type.equals("Swim")) {
+			spinner.setSelection(4);
+		}
 	}
 }

@@ -24,6 +24,7 @@ public class FragmentTimeAndSubmit extends Fragment implements FragmentDataColle
 	private Button setTimePickerButton;
 	private Button setDatePickerButton;
 	private Button submitButton;
+	private Button cancelButton;
 	private TextView submitTimeView;
 	private TextView submitDateView;
 	private Communicator communicator;
@@ -38,11 +39,16 @@ public class FragmentTimeAndSubmit extends Fragment implements FragmentDataColle
 		setTimePickerButton = (Button) view.findViewById(R.id.setTimePicker);
 		setDatePickerButton = (Button) view.findViewById(R.id.setDatePicker);
 		submitButton = (Button) view.findViewById(R.id.dateAndTimeSubmit);
+		cancelButton = (Button) view.findViewById(R.id.dateAndTimeCancel);
 		submitTimeView = (TextView) view.findViewById(R.id.submitTimeView);
 		submitDateView = (TextView) view.findViewById(R.id.submitDateView);
 		submitTimeView.setText(timePicker.getCurrentHour() + " : " + timePicker.getCurrentMinute());
 		submitDateView.setText(getFormatDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar  
                 .get(Calendar.DAY_OF_MONTH)));
+		Bundle bundle = getArguments();
+		Workout workout = bundle.getParcelable("workout_info");
+		initWorkoutInfo(workout);
+		
 		
 		setTimePickerButton.setOnClickListener(new OnClickListener() {
 			
@@ -68,18 +74,23 @@ public class FragmentTimeAndSubmit extends Fragment implements FragmentDataColle
 							int day) {
 						// TODO Auto-generated method stub
      					submitDateView.setText(getFormatDate(year, month, day));
+     					Toast.makeText(view.getContext(), "Set Time:"+getFormatDate(year, month, day), Toast.LENGTH_SHORT).show();
 					}  
                 }  , calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar  
                         .get(Calendar.DAY_OF_MONTH)).show();
 			}
 		});
 		
-		
+		cancelButton.setOnClickListener(new OnClickListener() {		
+			@Override
+			public void onClick(View v) {		
+				communicator.cancelWorkoutData();
+			}
+		});
 		submitButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				communicator.collectData(new Workout());
 			}
 		});
@@ -109,6 +120,16 @@ public class FragmentTimeAndSubmit extends Fragment implements FragmentDataColle
 		String workoutTime = (String) submitTimeView.getText();
 		workout.setDate(workoutDate);
 		workout.setWorkoutTime(workoutTime);
+		
+	}
+
+	@Override
+	public void initWorkoutInfo(Workout workout) {
+		
+		if (workout != null){
+			submitTimeView.setText(workout.getWorkoutTime());
+			submitDateView.setText(workout.getDate());
+		}
 		
 	}
 }

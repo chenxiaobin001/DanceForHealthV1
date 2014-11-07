@@ -74,10 +74,7 @@ public class WorkoutSummary extends Activity{
 	}
 	
 	public void onUpdateButtonClick(View view) {
-		// create an Intent using the current Activity 
-		// and the Class to be created
-		
-		// remove workout so you can recreate it
+
 		PrevWorkout preWorkout = PrevWorkout.getInstance();
 		List<Workout> all = preWorkout.getPrevious();
 		
@@ -93,14 +90,13 @@ public class WorkoutSummary extends Activity{
 			}
 		}
 
-		Log.v("removed", "" + b);
-		
-		Intent intent = new Intent(this, NewWorkoutActivity.class).putExtra("workout", wk);
+		Intent intent = new Intent(this, NewWorkoutPageSwipe.class).putExtra("workout", wk);
 		
 
 		// pass the Intent to the Activity, 
 		// using the specified request code
 		startActivity(intent);
+		finish();
 	}
 
 

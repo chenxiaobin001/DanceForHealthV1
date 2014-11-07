@@ -33,17 +33,22 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_workout_page_swipe);
-
+		Bundle extras = getIntent().getExtras();
+ 		if (extras != null) {
+ 			workout = (Workout) extras.get("workout");
+ 		}
+ 		
 		viewPager = (ViewPager) findViewById(R.id.pager);	
 		titleStrip = (PagerTitleStrip) findViewById(R.id.titleStrip);
 		titleStrip.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
 		titleStrip.setTextColor(Color.WHITE);
 		FragmentManager fragmentManager = getSupportFragmentManager();
-		myAdapter = new MyAdapter(fragmentManager);
+		myAdapter = new MyAdapter(fragmentManager, workout);
 		viewPager.setAdapter(myAdapter);
 		viewPager.setOnPageChangeListener(pageChangeListener);
 	}
 	
+
 	private OnPageChangeListener pageChangeListener = new OnPageChangeListener(){
 		
 		int currentPosition = 0;
@@ -105,7 +110,13 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 		startActivity(intent);
 		finish();
 	}
-	
+	@Override
+	public void cancelWorkoutData() {
+		
+		Intent i = new Intent(this, HomeActivity.class);
+		startActivity(i);
+		finish();
+	}
 	private void saveDataToFile(){
 		
 		Gson gson = new Gson();
@@ -129,13 +140,19 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 		
 		private List<Fragment> fragments;
 		
-		public MyAdapter(FragmentManager fm) {
+		public MyAdapter(FragmentManager fm, Workout workout) {
 			super(fm);
 			this.fragments = new ArrayList<Fragment>();
 			fragments.add(new FragmentTypeAndFeel());
 			fragments.add(new FragmentWeightAndStep());
 			fragments.add(new FragmentHeartRate());
 			fragments.add(new FragmentTimeAndSubmit());
+			for (int i = 0; i < fragments.size(); i++){
+				Fragment f = fragments.get(i);
+				Bundle bundle = new Bundle();
+				bundle.putParcelable("workout_info", workout);
+				f.setArguments(bundle);
+			}
 		}
 
 		@Override
@@ -176,5 +193,7 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 		
 		
 	}
+
+	
 }
 

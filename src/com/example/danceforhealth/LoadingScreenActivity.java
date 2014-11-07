@@ -81,11 +81,16 @@ public class LoadingScreenActivity extends Activity{
 		workouts.add(workout);
 	}
 	
+	private void clearWorkout(){
+		List<Workout> workouts = PrevWorkout.getInstance().getPrevious();
+		workouts.clear();
+	}
+	
 	public void readWorkoutFromFile(String filePath) throws Exception {
 		
 		String content = getStringFromFile(filePath);
 		String[] contents = content.split("\n");
-		
+		clearWorkout();
 		Gson gson = new Gson();
 		for (String c : contents){
 			Log.v("reading", c);

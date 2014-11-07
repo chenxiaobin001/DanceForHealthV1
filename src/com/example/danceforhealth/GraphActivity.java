@@ -37,6 +37,8 @@ public class GraphActivity extends Activity {
 	
 	public void onBackButtonClick(View view) {
 		//end activity and go back to the home page
+		Intent intent = new Intent(this, HomeActivity.class);
+		startActivity(intent);
 		finish();
 	}
 	

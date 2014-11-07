@@ -32,6 +32,10 @@ public class FragmentHeartRate extends Fragment implements FragmentDataCollectio
 		textview = (TextView)view.findViewById(R.id.timerTextView_v1);
 		edittext = (EditText)view.findViewById(R.id.heartRateEditText_v1);
 		timerButton = (Button) view.findViewById(R.id.timerButton_v1);
+		Bundle bundle = getArguments();
+		Workout workout = bundle.getParcelable("workout_info");
+		initWorkoutInfo(workout);
+			
 		timerButton.setOnClickListener(new OnClickListener(){
 			@Override
             public void onClick(View v)
@@ -83,5 +87,14 @@ public class FragmentHeartRate extends Fragment implements FragmentDataCollectio
 		String input = edittext.getText().toString();
 		int heartrate = Integer.parseInt(input) * 4;
 		workout.setHeartrate(heartrate);
+	}
+
+	@Override
+	public void initWorkoutInfo(Workout workout) {
+		
+		if (workout != null){
+			edittext.setText(Integer.toString(workout.getHeartrate()));
+		}
+		
 	}
 }

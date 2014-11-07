@@ -58,16 +58,11 @@ public class HomeActivity extends Activity {
 	}
 
 	public void onNewButtonClick(View view) {
-		// create an Intent using the current Activity 
-		// and the Class to be created
-		Intent i = new Intent(this, NewWorkoutActivity.class);
 		
-		Intent i1 = new Intent(this, NewWorkoutPageSwipe.class);
-		Log.v("before_1", "safd");
-		// pass the Intent to the Activity, 
-		// using the specified request code
-//		startActivity(i);
-		startActivity(i1);
+	//	Intent i = new Intent(this, NewWorkoutActivity.class);
+		
+		Intent i = new Intent(this, NewWorkoutPageSwipe.class);
+		startActivity(i);
 	}
 
 	public void onPrevButtonClick(View view) {
@@ -100,6 +95,7 @@ public class HomeActivity extends Activity {
 		// pass the Intent to the Activity, 
 		// using the specified request code
 		startActivity(i);
+		finish();
 	}
 
 }
