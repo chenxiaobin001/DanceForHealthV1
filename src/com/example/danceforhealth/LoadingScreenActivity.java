@@ -31,16 +31,6 @@ public class LoadingScreenActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		final Intent i = new Intent(this, HomeActivity.class);
 		setContentView(R.layout.loading_screen);
-		
-		try{
-			
-		//	Toast.makeText(getBaseContext(),"file read",
-			//		Toast.LENGTH_SHORT).show();
-			readWorkoutFromFile(file);
-			Log.v("home", "read from log file");
-		}catch(Exception e){
-
-		}
 
 		CountDownTimer timer = new CountDownTimer(3000, 1000) {
 
@@ -73,26 +63,7 @@ public class LoadingScreenActivity extends Activity{
 			file = new File(context.getFilesDir(), "data_workout");
 			Log.v("loading", "created data file");
 		}
-		// set fonts
-/*
-		welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
-		Typeface font = Typeface.createFromAsset(getAssets(), "KOMIKAX_.ttf");
-		Typeface font_two = Typeface.createFromAsset(getAssets(),
-				"Komika_display.ttf");
-		welcomeTextView.setTypeface(font);
-		
-		levelTextView = (TextView) findViewById(R.id.workoutLevelTextView);
-		// level up every 5 hours you work out
-		// starting level is level 1
-		int level = calculateTime()/300 + 1;
-		int nextLevel = calculateTime()/300 + 2;
-		int minutesUntilNext = nextLevel*300 - calculateTime();
-		levelTextView.setText("You are currently at level " + level + " and have lost "+
-				 + calculateWeightLoss() + " pounds!\nWork out for " +
-				minutesUntilNext + " more minutes to level up!");
-		levelTextView.setTypeface(font_two);
-*/
-		//leveltxt.setTyp
+
 		timer.start();	
 	}
 	

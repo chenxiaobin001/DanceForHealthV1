@@ -112,6 +112,7 @@ public class WorkoutSummary extends Activity{
 		// pass the Intent to the Activity, 
 		// using the specified request code
 		startActivity(intent);
+		finish();	
 	}
 
 }

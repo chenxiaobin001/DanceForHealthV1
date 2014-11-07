@@ -48,6 +48,7 @@ public void onCreate(Bundle icicle) {
 		// pass the Intent to the Activity, 
 		// using the specified request code
 		startActivity(intent);
+		finish();	
 	}
   
   

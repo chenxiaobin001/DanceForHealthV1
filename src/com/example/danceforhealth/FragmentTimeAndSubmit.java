@@ -81,8 +81,6 @@ public class FragmentTimeAndSubmit extends Fragment implements FragmentDataColle
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				communicator.collectData(new Workout());
-				Intent intent = new Intent(getActivity(), HomeActivity.class);
-				startActivity(intent);
 			}
 		});
 		

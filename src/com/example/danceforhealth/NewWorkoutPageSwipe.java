@@ -13,6 +13,7 @@ import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -96,6 +97,13 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 		}
 		workouts.add(workout);
 		saveDataToFile();
+		Intent intent = new Intent();
+		Bundle b = new Bundle();
+		b.putParcelable("workout", workout);
+		intent.putExtras(b);
+		intent.setClass(this, WorkoutSummary.class);
+		startActivity(intent);
+		finish();
 	}
 	
 	private void saveDataToFile(){
