@@ -38,15 +38,15 @@ public class MySimpleArrayAdapter extends ArrayAdapter<Workout> {
 	
 	private void setImageIcon(Workout workout, ImageView imageView){
 
-		if (workout.getType() == "Dance"){
+		if (workout.getType().toString().equals("Dance")){
 			imageView.setImageResource(R.drawable.dance); 
-		}else if (workout.getType() == "Run"){
+		}else if (workout.getType().equals("Run")){
 			imageView.setImageResource(R.drawable.run); 
-		}else if (workout.getType() == "Walk"){
+		}else if (workout.getType().equals("Walk")){
 			imageView.setImageResource(R.drawable.walk); 
-		}else if (workout.getType() == "Bike"){
+		}else if (workout.getType().equals("Bike")){
 			imageView.setImageResource(R.drawable.bike); 
-		}else if (workout.getType() == "Swim"){
+		}else if (workout.getType().equals("Swim")){
 			imageView.setImageResource(R.drawable.swim); 
 		}
 

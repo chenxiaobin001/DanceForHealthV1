@@ -113,7 +113,7 @@ public class FragmentTypeAndFeel extends Fragment implements FragmentDataCollect
 		workout.setStrain(strain);
 		
 		int duration = Integer.parseInt(edittext.getText().toString());
-		workout.setType(selection);
+		workout.setType(selection.toString());
 		workout.setTime(duration);
 		
 	}
