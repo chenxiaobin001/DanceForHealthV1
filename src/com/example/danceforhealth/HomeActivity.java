@@ -277,6 +277,7 @@ public class HomeActivity extends Activity {
 		// pass the Intent to the Activity,
 		// using the specified request code
 		startActivity(i);
+		finish();
 	}
 
 	public void onPrevButtonClick(View view) {
@@ -287,6 +288,7 @@ public class HomeActivity extends Activity {
 		// pass the Intent to the Activity,
 		// using the specified request code
 		startActivity(i);
+		finish();
 	}
 
 	public void onProgressButtonClick(View view) {
@@ -297,6 +299,7 @@ public class HomeActivity extends Activity {
 		// pass the Intent to the Activity,
 		// using the specified request code
 		startActivity(i);
+		finish();
 	}
 
 	public void onDummyClick(View view) {
@@ -307,6 +310,7 @@ public class HomeActivity extends Activity {
 		// pass the Intent to the Activity,
 		// using the specified request code
 		startActivity(i);
+		finish();
 	}
 
 }
