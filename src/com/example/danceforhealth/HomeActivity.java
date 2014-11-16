@@ -103,22 +103,33 @@ public class HomeActivity extends Activity {
 package com.example.danceforhealth;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class HomeActivity extends Activity {
+public class HomeActivity extends ActionBarActivity {
 
 	private Button newWorkoutButton;
 	private Button preWorkoutButton;
@@ -130,13 +141,22 @@ public class HomeActivity extends Activity {
 	private TextView achievementTextView;
 	private PopupWindow mPopupWindow;
 	private Util util = new Util();
+	
+	private DrawerLayout drawerLayout;
+	private ListView listView;
+	private ActionBarDrawerToggle drawerListener;
+	private MyAdatper myAdatper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		final Intent i = new Intent(this, HomeActivity.class);
 		setContentView(R.layout.activity_home);
-
+		
+		drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+		listView = (ListView) findViewById(R.id.drawerList);
+		myAdatper = new MyAdatper(this);
+		listView.setAdapter(myAdatper);
 		
 		achievementTextView = (TextView) findViewById(R.id.prizeTextView);
 		levelTextView = (TextView) findViewById(R.id.levelView);
@@ -146,8 +166,35 @@ public class HomeActivity extends Activity {
 		newWorkoutButton = (Button) findViewById(R.id.newWorkoutButton);
 		preWorkoutButton = (Button) findViewById(R.id.preWorkoutButton);
 		showProgressButton = (Button) findViewById(R.id.showProgressButton);
+		
+		listView.setOnItemClickListener(new OnItemClickListener() {
 
-
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				listView.setItemChecked(position, true);
+			}
+			
+		});
+		
+		drawerListener = new ActionBarDrawerToggle(this, drawerLayout, R.drawable.ic_action_navigation_menu, R.string.drawer_open, R.string.drawer_close){
+			@Override
+			public void onDrawerOpened(View drawerView) {
+				// TODO Auto-generated method stub
+				super.onDrawerOpened(drawerView);
+		//		Toast.makeText(HomeActivity.this, "Drawer opened", Toast.LENGTH_LONG).show();
+			}
+			@Override
+			public void onDrawerClosed(View drawerView) {
+				// TODO Auto-generated method stub
+				super.onDrawerClosed(drawerView);
+		//		Toast.makeText(HomeActivity.this, "Drawer closed", Toast.LENGTH_LONG).show();
+			}
+		};
+		drawerLayout.setDrawerListener(drawerListener);
+		getSupportActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
 		updateState();
 
 		// use getInstance
@@ -233,6 +280,19 @@ public class HomeActivity extends Activity {
 			break;
 		}
 	}
+	
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState){
+		super.onPostCreate(savedInstanceState);
+		drawerListener.syncState();
+	}
+	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		// TODO Auto-generated method stub
+		super.onConfigurationChanged(newConfig);
+		drawerListener.onConfigurationChanged(newConfig);
+	}
 
 	private void updateState() {
 		State previous = State.getInstance();
@@ -261,7 +321,22 @@ public class HomeActivity extends Activity {
 		previous.setWorkingTime(workingTime);
 		previous.setWorkingWeeks(workingWeeks);
 	}
-
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (drawerListener.onOptionsItemSelected(item)){
+			return true;
+		}
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -312,6 +387,55 @@ public class HomeActivity extends Activity {
 		startActivity(i);
 		finish();
 	}
+	
+class MyAdatper extends BaseAdapter{
+		
+		private Context context;
+		private String[] items;
+		int[] images = {R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher};
+		public MyAdatper(Context context){
+			items = context.getResources().getStringArray(R.array.items);
+			this.context = context;
+		}
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return items.length;
+		}
 
+		@Override
+		public Object getItem(int position) {
+			// TODO Auto-generated method stub
+			return items[position];
+		}
+
+		@Override
+		public long getItemId(int position) {
+			// TODO Auto-generated method stub
+			return position;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			// TODO Auto-generated method stub
+			View row = null;
+			if (convertView == null){
+				LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				row = inflater.inflate(R.layout.custom_layout, parent, false);
+			}else{
+				row = convertView;
+			}
+			TextView titleTextView = (TextView) row.findViewById(R.id.textView1);
+			ImageView titleImageView = (ImageView) row.findViewById(R.id.imageView1);
+			
+			titleTextView.setText(items[position]);
+			titleTextView.setTextAppearance(HomeActivity.this, android.R.style.TextAppearance_DeviceDefault_Large);
+			titleTextView.setTextColor(Color.parseColor("#ffffff"));
+			titleImageView.setImageResource(images[position]);
+			return row;
+		}
+	
+	}
+	
 }
 

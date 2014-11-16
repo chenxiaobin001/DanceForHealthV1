@@ -32,6 +32,13 @@
         <item>Bike</item>
         <item>Swim</item>
     </string-array>
+    
+    <string-array name="items">
+        <item>Account</item>
+        <item>Achievement</item>
+        <item>Sign in</item>
+        <item>Sign out</item>
+    </string-array>
 
     <string name="title_activity_heart_rate_two">Measure Your Heart Rate Part Two</string>
     <string name="title_activity_graph">Progress</string>
@@ -48,5 +55,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_workout_feel">Workout Feel History</string>
     <string name="title_activity_workout_type">Workout Type History</string>
+    <string name="drawer_open">open navigation drawer</string>
+    <string name="drawer_close">close navigation drawer</string>
 
 </resources>
