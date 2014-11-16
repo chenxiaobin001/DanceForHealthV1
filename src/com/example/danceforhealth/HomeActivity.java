@@ -102,6 +102,8 @@ public class HomeActivity extends Activity {
 
 package com.example.danceforhealth;
 
+import com.parse.Parse;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -208,12 +210,13 @@ public class HomeActivity extends ActionBarActivity {
 		
 	}
 	
-	
+
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState){
 		super.onPostCreate(savedInstanceState);
 		drawerListener.syncState();
 	}
+	
 	
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
