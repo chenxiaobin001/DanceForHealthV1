@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicator{
 	private ViewPager viewPager = null;
@@ -38,6 +39,7 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
  			workout = (Workout) extras.get("workout");
  		}
  		
+ 		getActionBar().setTitle("Workout form");  
 		viewPager = (ViewPager) findViewById(R.id.pager);	
 		titleStrip = (PagerTitleStrip) findViewById(R.id.titleStrip);
 		titleStrip.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
@@ -46,9 +48,17 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 		myAdapter = new MyAdapter(fragmentManager, workout);
 		viewPager.setAdapter(myAdapter);
 		viewPager.setOnPageChangeListener(pageChangeListener);
+		Toast.makeText(getApplicationContext(), "Swipe to see different pages", Toast.LENGTH_SHORT).show();
 	}
 	
-
+	@Override
+	public void onBackPressed() {    
+	    Intent intent = new Intent();
+	    intent.setClass(this, HomeActivity.class);
+	    startActivity(intent);
+	    finish();
+	}
+	
 	private OnPageChangeListener pageChangeListener = new OnPageChangeListener(){
 		
 		int currentPosition = 0;
