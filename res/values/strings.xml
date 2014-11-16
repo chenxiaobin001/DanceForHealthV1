@@ -24,7 +24,8 @@
     <string name="seven">7</string>
     <string name="next">Next</string>
     <string name="back">Back</string>
-
+	<string name="signup">Sign up</string>
+	
     <string-array name="workouts_array">
         <item>Dance</item>
         <item>Run</item>
@@ -37,6 +38,7 @@
         <item>Account</item>
         <item>Achievement</item>
         <item>Sign in</item>
+        <item>Sign up</item>
         <item>Sign out</item>
     </string-array>
 
@@ -59,4 +61,7 @@
     <string name="drawer_close">close navigation drawer</string>
 	<string name="login">Login</string>
 	<string name="cancel">Cancel</string>
+	
+	<string name="app_id">jZaeol2RE6WEDrqyBM67NJD1XC75NgnN2rpwEODE</string>
+    <string name="client_id">wkwG4fjdOMZ1mGpdOXbX5UzhIAb54Qnq4VLv0o2e</string>
 </resources>

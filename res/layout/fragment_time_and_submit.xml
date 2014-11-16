@@ -21,7 +21,7 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/loginTextView"
+                android:id="@+id/SignupTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Set the workout date and time"

@@ -18,7 +18,7 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/loginTextView"
+            android:id="@+id/SignupTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Going to this screen just adds a workout to the database" />

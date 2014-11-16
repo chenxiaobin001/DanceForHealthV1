@@ -178,6 +178,10 @@ public class HomeActivity extends ActionBarActivity {
 						showLogin(view);
 						break;
 					}
+					case 3:{
+						showSignup(view);
+						break;
+					}
 				}
 			}
 			
@@ -186,13 +190,11 @@ public class HomeActivity extends ActionBarActivity {
 		drawerListener = new ActionBarDrawerToggle(this, drawerLayout, R.drawable.ic_action_navigation_menu, R.string.drawer_open, R.string.drawer_close){
 			@Override
 			public void onDrawerOpened(View drawerView) {
-				// TODO Auto-generated method stub
 				super.onDrawerOpened(drawerView);
 		//		Toast.makeText(HomeActivity.this, "Drawer opened", Toast.LENGTH_LONG).show();
 			}
 			@Override
 			public void onDrawerClosed(View drawerView) {
-				// TODO Auto-generated method stub
 				super.onDrawerClosed(drawerView);
 		//		Toast.makeText(HomeActivity.this, "Drawer closed", Toast.LENGTH_LONG).show();
 			}
@@ -202,90 +204,10 @@ public class HomeActivity extends ActionBarActivity {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		updateState();
-
-		// use getInstance
-		State state = State.getInstance();
-		int level = state.getLevel();
-		int workingTime = state.getWorkingTime();
-		int workingWeeks = state.getWorkingWeeks();
-
-		// calculate level - level up every 5 hours you work out, starting level
-		// is level 1
+		setAchievement();
 		
-		
-		int nextLevel = level + 1;
-		int minutesUntilNext = (nextLevel - 1) * 300 - workingTime;
-		levelNumTextView.setText(" " + level);
-		levelNumTextView.setTextColor(Color.WHITE);
-		
-		nextLevelMinutes.setText("Work out for " + minutesUntilNext
-				+ " more minutes to level up");
-		nextLevelMinutes.setTextColor(Color.WHITE);
-		// set progress bar
-		System.out.println((int) ((300 - minutesUntilNext) / 300.0 * 100));
-		progressBar.setProgress((int) ((300 - minutesUntilNext) / 300.0 * 100));
-
-		Typeface font2 = Typeface.createFromAsset(getAssets(),
-				"Komika_display.ttf");
-		levelTextView.setTypeface(font2);
-		levelNumTextView.setTypeface(font2);
-		nextLevelMinutes.setTypeface(font2);
-		levelNumTextView.setTextSize(26);//
-		levelTextView.setTextSize(26);//
-		nextLevelMinutes.setTextSize(16);//
-
-		// set fonts
-		// welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
-		
-		// Button d = (Button) findViewById(R.id.dummy); <- uncomment this for
-		// testing
-		Typeface komikaFont1 = Typeface.createFromAsset(getAssets(),
-				"KOMIKAX_.ttf");
-		Typeface komikaFont2 = Typeface.createFromAsset(getAssets(),
-				"Komika_display.ttf");
-		// welcomeTextView.setTypeface(komikaFont1);
-		//newWorkoutButton.setTypeface(komikaFont2);
-		//preWorkoutButton.setTypeface(komikaFont2);
-		// d.setTypeface(font_two); <- uncomment this for testing
-		//showProgressButton.setTypeface(komikaFont2);
-		newWorkoutButton.setTextSize(20);
-		preWorkoutButton.setTextSize(20);
-		showProgressButton.setTextSize(20);
-		newWorkoutButton.setTextColor(Color.WHITE);
-		preWorkoutButton.setTextColor(Color.WHITE);
-		showProgressButton.setTextColor(Color.WHITE);
-
-		// set achievement
-
-		int achievement = workingWeeks / 4;
-		achievementTextView.setTypeface(komikaFont2);
-		achievementTextView.setTextSize(20);
-
-		switch (achievement) {
-		case 0:
-			if (workingWeeks == 1) {
-				achievementTextView.setText("You have been working out for "
-						+ workingWeeks + " week");
-
-			} else {
-				achievementTextView.setText("You have been working out for "
-						+ workingWeeks + " weeks");
-
-			}
-			break;
-		case 6:
-			achievementTextView
-					.setText("You have been working out for half a year");
-			break;
-		case 12:
-			achievementTextView.setText("You have been working out for 1 year");
-			break;
-		default:
-			achievementTextView.setText("You have been working out for "
-					+ achievement + " month!");
-			break;
-		}
 	}
+	
 	
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState){
@@ -295,7 +217,6 @@ public class HomeActivity extends ActionBarActivity {
 	
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
-		// TODO Auto-generated method stub
 		super.onConfigurationChanged(newConfig);
 		drawerListener.onConfigurationChanged(newConfig);
 	}
@@ -320,7 +241,6 @@ public class HomeActivity extends ActionBarActivity {
 //
 //		}
 
-		// TODO if new achievement
 
 		previous.setLevel(level);
 		previous.setLostWeight(weightLoss);
@@ -400,38 +320,114 @@ public class HomeActivity extends ActionBarActivity {
 		loginDialog.show(getFragmentManager(), "login");
 	}
 	
+	public void showSignup(View view){
+		SignupDialog signupDialog = new SignupDialog();
+		signupDialog.show(getFragmentManager(), "signup");
+	}
 	
+	private void setAchievement(){
+		// use getInstance
+		State state = State.getInstance();
+		int level = state.getLevel();
+		int workingTime = state.getWorkingTime();
+		int workingWeeks = state.getWorkingWeeks();
+
+		// calculate level - level up every 5 hours you work out, starting level
+		// is level 1
+		
+		
+		int nextLevel = level + 1;
+		int minutesUntilNext = (nextLevel - 1) * 300 - workingTime;
+		levelNumTextView.setText(" " + level);
+		levelNumTextView.setTextColor(Color.WHITE);
+		
+		nextLevelMinutes.setText("Work out for " + minutesUntilNext
+				+ " more minutes to level up");
+		nextLevelMinutes.setTextColor(Color.WHITE);
+		// set progress bar
+		System.out.println((int) ((300 - minutesUntilNext) / 300.0 * 100));
+		progressBar.setProgress((int) ((300 - minutesUntilNext) / 300.0 * 100));
+
+		Typeface font2 = Typeface.createFromAsset(getAssets(),
+				"Komika_display.ttf");
+		levelTextView.setTypeface(font2);
+		levelNumTextView.setTypeface(font2);
+		nextLevelMinutes.setTypeface(font2);
+		levelNumTextView.setTextSize(26);//
+		levelTextView.setTextSize(26);//
+		nextLevelMinutes.setTextSize(16);//
+
+
+		Typeface komikaFont1 = Typeface.createFromAsset(getAssets(),
+				"KOMIKAX_.ttf");
+		Typeface komikaFont2 = Typeface.createFromAsset(getAssets(),
+				"Komika_display.ttf");
+
+		newWorkoutButton.setTextSize(20);
+		preWorkoutButton.setTextSize(20);
+		showProgressButton.setTextSize(20);
+		newWorkoutButton.setTextColor(Color.WHITE);
+		preWorkoutButton.setTextColor(Color.WHITE);
+		showProgressButton.setTextColor(Color.WHITE);
+
+		// set achievement
+
+		int achievement = workingWeeks / 4;
+		achievementTextView.setTypeface(komikaFont2);
+		achievementTextView.setTextSize(20);
+
+		switch (achievement) {
+		case 0:
+			if (workingWeeks == 1) {
+				achievementTextView.setText("You have been working out for "
+						+ workingWeeks + " week");
+
+			} else {
+				achievementTextView.setText("You have been working out for "
+						+ workingWeeks + " weeks");
+
+			}
+			break;
+		case 6:
+			achievementTextView
+					.setText("You have been working out for half a year");
+			break;
+		case 12:
+			achievementTextView.setText("You have been working out for 1 year");
+			break;
+		default:
+			achievementTextView.setText("You have been working out for "
+					+ achievement + " month!");
+			break;
+		}
+	}
 	
 class MyAdatper extends BaseAdapter{
 		
 		private Context context;
 		private String[] items;
-		int[] images = {R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher};
+		int[] images = {R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher};
 		public MyAdatper(Context context){
 			items = context.getResources().getStringArray(R.array.items);
 			this.context = context;
 		}
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return items.length;
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
 			return items[position];
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return position;
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
 			View row = null;
 			if (convertView == null){
 				LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -439,7 +435,7 @@ class MyAdatper extends BaseAdapter{
 			}else{
 				row = convertView;
 			}
-			TextView titleTextView = (TextView) row.findViewById(R.id.loginTextView);
+			TextView titleTextView = (TextView) row.findViewById(R.id.SignupTextView);
 			ImageView titleImageView = (ImageView) row.findViewById(R.id.imageView1);
 			
 			titleTextView.setText(items[position]);
