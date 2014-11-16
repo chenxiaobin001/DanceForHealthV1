@@ -3,6 +3,7 @@ package com.example.danceforhealth;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,6 @@ public class LoginDialog extends DialogFragment{
 	
 	private EditText username;
 	private EditText password;
-	private Button loginBtn;
-	private Button cancelBtn;
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		
@@ -24,13 +23,20 @@ public class LoginDialog extends DialogFragment{
 		View view = inflater.inflate(R.layout.popup_window_login, null);
 		username = (EditText) view.findViewById(R.id.usernameEditText);
 		password = (EditText) view.findViewById(R.id.passwordEditText);
-		loginBtn = (Button) view.findViewById(R.id.loginButton);
-		cancelBtn = (Button) view.findViewById(R.id.cancelButton);
-		cancelBtn.setOnClickListener(new OnClickListener() {
+		builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 			
 			@Override
-			public void onClick(View v) {
-				dismiss();
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		builder.setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 		
