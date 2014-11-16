@@ -57,5 +57,6 @@
     <string name="title_activity_workout_type">Workout Type History</string>
     <string name="drawer_open">open navigation drawer</string>
     <string name="drawer_close">close navigation drawer</string>
-
+	<string name="login">Login</string>
+	<string name="cancel">Cancel</string>
 </resources>

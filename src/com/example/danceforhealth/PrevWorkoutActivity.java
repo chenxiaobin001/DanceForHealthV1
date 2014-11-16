@@ -36,7 +36,7 @@ public void onCreate(Bundle icicle) {
     setListAdapter(adapter);
     
     // set font
-	TextView t = (TextView) findViewById(R.id.textView1);
+	TextView t = (TextView) findViewById(R.id.loginTextView);
 	Button b = (Button) findViewById(R.id.preWorkoutButton);
   }
   

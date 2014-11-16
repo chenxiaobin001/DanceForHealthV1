@@ -173,6 +173,12 @@ public class HomeActivity extends ActionBarActivity {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// TODO Auto-generated method stub
 				listView.setItemChecked(position, true);
+				switch (position){
+					case 2:{
+						showLogin(view);
+						break;
+					}
+				}
 			}
 			
 		});
@@ -388,6 +394,14 @@ public class HomeActivity extends ActionBarActivity {
 		finish();
 	}
 	
+	
+	public void showLogin(View view){
+		LoginDialog loginDialog = new LoginDialog();
+		loginDialog.show(getFragmentManager(), "login");
+	}
+	
+	
+	
 class MyAdatper extends BaseAdapter{
 		
 		private Context context;
@@ -421,11 +435,11 @@ class MyAdatper extends BaseAdapter{
 			View row = null;
 			if (convertView == null){
 				LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				row = inflater.inflate(R.layout.custom_layout, parent, false);
+				row = inflater.inflate(R.layout.navigation_item_layout, parent, false);
 			}else{
 				row = convertView;
 			}
-			TextView titleTextView = (TextView) row.findViewById(R.id.textView1);
+			TextView titleTextView = (TextView) row.findViewById(R.id.loginTextView);
 			ImageView titleImageView = (ImageView) row.findViewById(R.id.imageView1);
 			
 			titleTextView.setText(items[position]);
