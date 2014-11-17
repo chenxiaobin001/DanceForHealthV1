@@ -144,7 +144,9 @@ public class LoginDialog extends DialogFragment{
 			  public void done(ParseUser user, ParseException e) {
 			    if (user != null) {
 			    	Toast.makeText(parent.getApplicationContext(), "Successfully Logged in!", Toast.LENGTH_SHORT).show();
-			    } else {
+			    }else if(e.getCode() == ParseException.CONNECTION_FAILED){ 
+			    	Toast.makeText(parent.getApplicationContext(), "No Internet connection!", Toast.LENGTH_SHORT).show();
+			    }else {
 			    	Toast.makeText(parent.getApplicationContext(), "Wrong username/password!", Toast.LENGTH_SHORT).show();
 			    }
 			  }

@@ -12,7 +12,7 @@ public class DanceForHealthApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
- 
+        Parse.enableLocalDatastore(this); 
         Parse.initialize(this, getString(R.string.app_id), getString(R.string.client_id));
  
         ParseUser.enableAutomaticUser();

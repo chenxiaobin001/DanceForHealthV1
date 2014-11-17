@@ -9,6 +9,7 @@ import com.parse.LogInCallback;
 import com.parse.ParseAnonymousUtils;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -153,6 +154,27 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 		wds.setWorkoutDate(workout.getDate());
 		wds.setWorkoutTime(workout.getWorkoutTime());
 		wds.saveInBackground();
+		wds.pinInBackground( new SaveCallback( ) {
+	        @Override
+	        public void done( ParseException e ) {
+	            if( e == null ) {
+	 //             Toast.makeText(getApplicationContext(), "save to cloud", Toast.LENGTH_SHORT).show();
+	            } else {
+	 //           	Toast.makeText(getApplicationContext(), "save in local", Toast.LENGTH_SHORT).show();
+	            }
+	        }
+	    } );
+		wds.saveEventually(new SaveCallback( ) {
+	        @Override
+	        public void done( ParseException e ) {
+	            if( e == null ) {
+	 //               Toast.makeText(getApplicationContext(), "save to cloud", Toast.LENGTH_SHORT).show();
+	            } else {
+	 //           	Toast.makeText(getApplicationContext(), "save in local", Toast.LENGTH_SHORT).show();
+	           }
+	        }
+	    } );
+	 
 	}
 	
 	private void saveDataToFile(){
