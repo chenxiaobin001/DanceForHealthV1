@@ -102,7 +102,11 @@ public class HomeActivity extends Activity {
 
 package com.example.danceforhealth;
 
+import com.parse.LogInCallback;
 import com.parse.Parse;
+import com.parse.ParseAnonymousUtils;
+import com.parse.ParseUser;
+import com.parse.ParseException;
 
 import android.app.Activity;
 import android.content.Context;
@@ -184,6 +188,10 @@ public class HomeActivity extends ActionBarActivity {
 						showSignup(view);
 						break;
 					}
+					case 4:{
+						logout();
+						break;
+					}
 				}
 			}
 			
@@ -207,7 +215,7 @@ public class HomeActivity extends ActionBarActivity {
 		
 		updateState();
 		setAchievement();
-		
+//		createAnonimousUser();
 	}
 	
 
@@ -318,15 +326,33 @@ public class HomeActivity extends ActionBarActivity {
 	}
 	
 	
-	public void showLogin(View view){
-		LoginDialog loginDialog = new LoginDialog();
-		loginDialog.show(getFragmentManager(), "login");
+	private void showLogin(View view){
+		ParseUser currentUser = ParseUser.getCurrentUser();
+		if (currentUser == null || currentUser.getObjectId() == null) {
+			LoginDialog loginDialog = new LoginDialog();
+			loginDialog.show(getFragmentManager(), "login");
+		} else {
+			Toast.makeText(getApplicationContext(), "You already signed in, welcome back " + currentUser.getUsername(), Toast.LENGTH_SHORT).show();
+		}
+		
 	}
 	
-	public void showSignup(View view){
+	private void showSignup(View view){
 		SignupDialog signupDialog = new SignupDialog();
 		signupDialog.show(getFragmentManager(), "signup");
 	}
+	
+	private void logout(){
+		ParseUser currentUser = ParseUser.getCurrentUser();
+		if (currentUser == null || currentUser.getObjectId() == null){
+			Toast.makeText(getApplicationContext(), "Already signed out!", Toast.LENGTH_SHORT).show();
+		}else{
+			ParseUser.logOut();
+			Toast.makeText(getApplicationContext(), "Successfully log out", Toast.LENGTH_SHORT).show();
+		}
+	}
+	
+
 	
 	private void setAchievement(){
 		// use getInstance

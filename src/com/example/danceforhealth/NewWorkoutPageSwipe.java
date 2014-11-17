@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.parse.LogInCallback;
+import com.parse.ParseAnonymousUtils;
+import com.parse.ParseException;
+import com.parse.ParseUser;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +20,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -111,6 +116,7 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 			fragment.updateWorkoutInfo(workout);
 		}
 		workouts.add(workout);
+		saveDateToDatastore(workout);
 		saveDataToFile();
 		Intent intent = new Intent();
 		Bundle b = new Bundle();
@@ -127,6 +133,28 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 		startActivity(i);
 		finish();
 	}
+	
+	private void saveDateToDatastore(Workout workout){
+		
+		ParseUser user = ParseUser.getCurrentUser();
+		WorkoutDataStore wds = new WorkoutDataStore();
+		wds.setUser(user);
+		wds.setType(workout.getType());
+		wds.setStrain(workout.getStrain());
+		wds.setHeartrate(workout.getHeartrate());
+		wds.setSteps(workout.getSteps());
+		wds.setWeight(workout.getWeight());
+		wds.setWorkingTime(workout.getTime());
+		wds.setLikedIndex(workout.getLikedIndex());
+		wds.setFunIndex(workout.getFunIndex());
+		wds.setTiredIndex(workout.getTiredIndex());
+		wds.setWeek(workout.getWeek());
+		wds.setDay(workout.getDay());
+		wds.setWorkoutDate(workout.getDate());
+		wds.setWorkoutTime(workout.getWorkoutTime());
+		wds.saveInBackground();
+	}
+	
 	private void saveDataToFile(){
 		
 		Gson gson = new Gson();
@@ -144,6 +172,24 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 	      } catch (Exception e) {
 	         e.printStackTrace();
 	      }
+	}
+	
+	private void createAnonimousUser(){
+		ParseUser user = ParseUser.getCurrentUser();
+		if (user == null || !ParseAnonymousUtils.isLinked(user)){
+			ParseAnonymousUtils.logIn(new LogInCallback() {
+				  @Override
+				  public void done(ParseUser user, ParseException e) {
+				    if (e != null) {
+				      Log.d("MyApp", "Anonymous login failed.");
+				    } else {
+				      Log.d("MyApp", "Anonymous user logged in.");
+				    }
+				  }
+				});
+		}else{
+			Toast.makeText(getApplicationContext(), "Welcome back!", Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	class MyAdapter extends FragmentStatePagerAdapter{
