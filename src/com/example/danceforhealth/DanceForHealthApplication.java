@@ -12,7 +12,6 @@ public class DanceForHealthApplication extends Application {
     public void onCreate() {
         super.onCreate();
  
-        // Add your initialization code here
         Parse.initialize(this, getString(R.string.app_id), getString(R.string.client_id));
  
         ParseUser.enableAutomaticUser();

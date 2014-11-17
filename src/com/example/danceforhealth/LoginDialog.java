@@ -1,5 +1,10 @@
 package com.example.danceforhealth;
 
+import com.parse.LogInCallback;
+import com.parse.ParseUser;
+import com.parse.ParseException;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -14,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnCreateContextMenuListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginDialog extends DialogFragment{
 	
@@ -21,10 +27,12 @@ public class LoginDialog extends DialogFragment{
 	private EditText password;
 	private View view;
 	private Dialog mDialog;
+	private Activity parent;
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		
+		parent = getActivity();
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		View view = inflater.inflate(R.layout.popup_window_login, null);
@@ -44,7 +52,7 @@ public class LoginDialog extends DialogFragment{
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				
-				
+				login();
 			}
 		});
 	
@@ -126,5 +134,20 @@ public class LoginDialog extends DialogFragment{
 			return true;
 		}
 		return false;
+	}
+	
+	private void login(){
+		
+		String userNameText = username.getText().toString();
+        String passwordText = password.getText().toString();
+		ParseUser.logInInBackground(userNameText, passwordText, new LogInCallback() {
+			  public void done(ParseUser user, ParseException e) {
+			    if (user != null) {
+			    	Toast.makeText(parent.getApplicationContext(), "Successfully Logged in!", Toast.LENGTH_SHORT).show();
+			    } else {
+			    	Toast.makeText(parent.getApplicationContext(), "Wrong username/password!", Toast.LENGTH_SHORT).show();
+			    }
+			  }
+		});
 	}
 }

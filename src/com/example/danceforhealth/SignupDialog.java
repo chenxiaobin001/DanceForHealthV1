@@ -1,5 +1,10 @@
 package com.example.danceforhealth;
 
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -14,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnCreateContextMenuListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SignupDialog extends DialogFragment{
 	
@@ -24,16 +30,20 @@ public class SignupDialog extends DialogFragment{
 	private EditText email;
 	private View view;
 	private Dialog mDialog;
-
+	private Activity parent;
+	
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		
+		parent = getActivity();
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		View view = inflater.inflate(R.layout.popup_window_signup, null);
 		this.view = view;
 		username = (EditText) view.findViewById(R.id.usernameEditText);
 		password = (EditText) view.findViewById(R.id.passwordEditText);
+		firstName = (EditText) view.findViewById(R.id.firstNameEditText);
+		lastName = (EditText) view.findViewById(R.id.lastNameEditText);
+		email = (EditText) view.findViewById(R.id.emailEditText);
 		builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 			
 			@Override
@@ -46,8 +56,7 @@ public class SignupDialog extends DialogFragment{
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				
-				
+				signup();
 			}
 		});
 	
@@ -130,4 +139,51 @@ public class SignupDialog extends DialogFragment{
 		}
 		return false;
 	}
+
+	private void signup(){
+		ParseUser user = new ParseUser();
+		user.setUsername(username.getText().toString());
+		user.setPassword(password.getText().toString());
+		if (!email.getText().toString().trim().equals(""))
+			user.setEmail(email.getText().toString());
+		user.put("lastName", lastName.getText().toString());
+		user.put("firstName", firstName.getText().toString());
+		user.signUpInBackground(new SignUpCallback() {
+			  public void done(ParseException e) {
+			    if (e == null) {
+			    	Toast.makeText(parent.getApplicationContext(), "Successfully Sign up!", Toast.LENGTH_SHORT).show();
+			    } else {
+			    	switch (e.getCode()) {
+                    	case ParseException.USERNAME_TAKEN:{
+                    		Toast.makeText(parent.getApplicationContext(), "Sorry, this username has already been taken!", Toast.LENGTH_SHORT).show();
+                    		break;
+                    	}
+                    	case ParseException.CONNECTION_FAILED:{
+                    		Toast.makeText(parent.getApplicationContext(), "No Internet connection!", Toast.LENGTH_SHORT).show();
+                            break;
+                    	}
+                    	case ParseException.EMAIL_MISSING :{
+                    		Toast.makeText(parent.getApplicationContext(), "Missing Email Address!", Toast.LENGTH_SHORT).show();
+                            break;
+                    	}
+                    	case ParseException.EMAIL_TAKEN :{
+                    		Toast.makeText(parent.getApplicationContext(), "Email address is already taken!", Toast.LENGTH_SHORT).show();
+                            break;
+                    	}
+                    	case ParseException.INVALID_EMAIL_ADDRESS :{
+                    		Toast.makeText(parent.getApplicationContext(), "Invalid Email Address!", Toast.LENGTH_SHORT).show();
+                            break;
+                    	}
+                        default:{
+                        	Toast.makeText(parent.getApplicationContext(), "Sign up Error", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                    }
+			    }
+			  }
+			});
+	}
+
 }
+
+
