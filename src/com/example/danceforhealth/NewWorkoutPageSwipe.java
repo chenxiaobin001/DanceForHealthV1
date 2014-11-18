@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.parse.GetCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseAnonymousUtils;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -48,13 +50,14 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements
 	private Workout workout = null;
 	PrevWorkout preWorkout = PrevWorkout.getInstance();
 	List<Workout> workouts = preWorkout.getPrevious();
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_workout_page_swipe);
 		Bundle extras = getIntent().getExtras();
+		workout = null;
 		if (extras != null) {
 			workout = (Workout) extras.get("workout");
 		}
@@ -124,9 +127,9 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements
 	}
 
 	@Override
-	public void collectData(Workout workout) {
-
-		workout = new Workout();
+	public void collectData(Workout wk) {
+		
+		if (workout == null) workout = new Workout();
 		for (int i = 0; i < myAdapter.getCount(); i++) {
 			FragmentDataCollection fragment = (FragmentDataCollection) myAdapter
 					.getItem(i);
@@ -155,43 +158,36 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements
 
 	private void saveDateToDatastore(Workout workout){
 		
-		ParseUser user = ParseUser.getCurrentUser();
-		WorkoutDataStore wds = new WorkoutDataStore();
-		wds.setUser(user);
-		wds.setType(workout.getType());
-		wds.setStrain(workout.getStrain());
-		wds.setHeartrate(workout.getHeartrate());
-		wds.setSteps(workout.getSteps());
-		wds.setWeight(workout.getWeight());
-		wds.setWorkingTime(workout.getTime());
-		wds.setLikedIndex(workout.getLikedIndex());
-		wds.setFunIndex(workout.getFunIndex());
-		wds.setTiredIndex(workout.getTiredIndex());
-		wds.setWeek(workout.getWeek());
-		wds.setDay(workout.getDay());
-		wds.setWorkoutDate(workout.getDate());
-		wds.setWorkoutTime(workout.getWorkoutTime());
-		wds.pinInBackground( new SaveCallback( ) {
-	        @Override
-	        public void done( ParseException e ) {
-	            if( e == null ) {
-	 //             Toast.makeText(getApplicationContext(), "save to cloud", Toast.LENGTH_SHORT).show();
-	            } else {
-	 //           	Toast.makeText(getApplicationContext(), "save in local", Toast.LENGTH_SHORT).show();
-	            }
-	        }
-	    } );
-		wds.saveEventually(new SaveCallback( ) {
-	        @Override
-	        public void done( ParseException e ) {
-	            if( e == null ) {
-	 //               Toast.makeText(getApplicationContext(), "save to cloud", Toast.LENGTH_SHORT).show();
-	            } else {
-	 //           	Toast.makeText(getApplicationContext(), "save in local", Toast.LENGTH_SHORT).show();
-	           }
-	        }
-	    } );
-	 
+		updateDatastore(workout);
+
+	}
+
+	private boolean updateDatastore(Workout wk){
+		
+		final Workout workout = wk;
+		final boolean success[] = {false};
+		final ParseUser user = ParseUser.getCurrentUser();
+		ParseQuery<WorkoutDataStore> query = ParseQuery.getQuery(WorkoutDataStore.class);
+		query.whereEqualTo("User", user);
+		query.fromLocalDatastore();
+		query.getInBackground(workout.getDatabaseObjectID(), new GetCallback<WorkoutDataStore>() {
+			  public void done(WorkoutDataStore workoutDataStore, ParseException e) {
+			    if (e == null) {
+			    	workoutDataStore.setWorkoutFields(workout);
+			    	workoutDataStore.saveEventually();
+			    	workoutDataStore.pinInBackground();
+			    	success[0] = true;
+			    }else{
+			    	WorkoutDataStore wds = new WorkoutDataStore();
+			    	wds.setUser(user);
+					wds.setWorkoutFields(workout);
+					wds.saveEventually();
+					wds.pinInBackground();
+			    	success[0] = true;
+			    }
+			  }
+			});
+		return success[0];
 	}
 	
 	private void saveDataToFile() {

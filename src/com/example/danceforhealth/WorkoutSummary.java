@@ -75,26 +75,7 @@ public class WorkoutSummary extends Activity{
 	
 	public void onUpdateButtonClick(View view) {
 
-		PrevWorkout preWorkout = PrevWorkout.getInstance();
-		List<Workout> all = preWorkout.getPrevious();
-		
-		Iterator<Workout> iter = all.iterator();
-		Workout wk = new Workout();
-		boolean b = false;
-		while (iter.hasNext()) {
-			wk = iter.next();
-			
-			if (workout.equals(wk)) {
-				 b = all.remove(wk);
-				 break;
-			}
-		}
-
-		Intent intent = new Intent(this, NewWorkoutPageSwipe.class).putExtra("workout", wk);
-		
-
-		// pass the Intent to the Activity, 
-		// using the specified request code
+		Intent intent = new Intent(this, NewWorkoutPageSwipe.class).putExtra("workout", workout);
 		startActivity(intent);
 		finish();
 	}

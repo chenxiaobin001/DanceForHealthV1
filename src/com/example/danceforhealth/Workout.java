@@ -258,6 +258,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Workout implements Parcelable {
+	private String databaseObjectID;
 	private String type;
 	private int strain;
 	private int heartrate;
@@ -284,6 +285,7 @@ public class Workout implements Parcelable {
 		steps = 0;
 		weight = 0;
 		workingTime = 0;
+		databaseObjectID = "null";
 		
 		Date date = new Date();
 
@@ -314,6 +316,7 @@ public class Workout implements Parcelable {
 		setTiredIndex(p.readInt());
 		setDay(p.readInt());
 		setWeek(p.readInt());
+		setDatabaseObjectID(p.readString());
 	}
 
 
@@ -346,6 +349,8 @@ public class Workout implements Parcelable {
 				return false;
 		} else if (!workoutdate.equals(other.workoutdate))
 			return false;
+		if (databaseObjectID != other.databaseObjectID)
+			return false;
 		if (heartrate != other.heartrate)
 			return false;
 		if (steps != other.steps)
@@ -364,6 +369,14 @@ public class Workout implements Parcelable {
 		return true;
 	}
 
+	public String getDatabaseObjectID() {
+		return databaseObjectID;
+	}
+
+	public void setDatabaseObjectID(String objectID) {
+		this.databaseObjectID = objectID;
+	}
+	
 	public String getType() {
 		return type;
 	}
@@ -520,6 +533,7 @@ public class Workout implements Parcelable {
 		parcel.writeInt(getTiredIndex());
 		parcel.writeInt(getDay());
 		parcel.writeInt(getWeek());
+		parcel.writeString(getDatabaseObjectID());
 	}
 }
 

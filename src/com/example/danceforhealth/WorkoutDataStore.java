@@ -125,6 +125,22 @@ public class WorkoutDataStore extends ParseObject {
 	}
 	
 	
+	public void setWorkoutFields(Workout workout){
+		setType(workout.getType());
+		setStrain(workout.getStrain());
+		setHeartrate(workout.getHeartrate());
+		setSteps(workout.getSteps());
+		setWeight(workout.getWeight());
+		setWorkingTime(workout.getTime());
+		setLikedIndex(workout.getLikedIndex());
+		setFunIndex(workout.getFunIndex());
+		setTiredIndex(workout.getTiredIndex());
+		setWeek(workout.getWeek());
+		setDay(workout.getDay());
+		setWorkoutDate(workout.getDate());
+		setWorkoutTime(workout.getWorkoutTime());
+	}
+	
 	public Workout toWorkoutObject(){
 		
 		Workout workout = new Workout();
@@ -141,6 +157,7 @@ public class WorkoutDataStore extends ParseObject {
 		workout.setWeight(getWeight());
 		workout.setWorkoutDate(getWorkoutDate());
 		workout.setWorkoutTime(getWorkoutTime());
+		workout.setDatabaseObjectID(getObjectId());
 		return workout;
 	}
 
