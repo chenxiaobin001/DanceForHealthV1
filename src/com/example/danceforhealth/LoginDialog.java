@@ -1,6 +1,10 @@
 package com.example.danceforhealth;
 
+import java.util.List;
+
+import com.parse.FindCallback;
 import com.parse.LogInCallback;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.ParseException;
 
@@ -144,6 +148,7 @@ public class LoginDialog extends DialogFragment{
 			  public void done(ParseUser user, ParseException e) {
 			    if (user != null) {
 			    	Toast.makeText(parent.getApplicationContext(), "Successfully Logged in!", Toast.LENGTH_SHORT).show();
+			    	retriveCloudData(user);
 			    }else if(e.getCode() == ParseException.CONNECTION_FAILED){ 
 			    	Toast.makeText(parent.getApplicationContext(), "No Internet connection!", Toast.LENGTH_SHORT).show();
 			    }else {
@@ -151,5 +156,22 @@ public class LoginDialog extends DialogFragment{
 			    }
 			  }
 		});
+	}
+	
+	private void retriveCloudData(ParseUser user){
+		ParseQuery<WorkoutDataStore> query = ParseQuery.getQuery(WorkoutDataStore.class);
+		query.whereEqualTo("User", user);
+		query.findInBackground(new FindCallback<WorkoutDataStore>() {
+            @Override
+            public void done(List<WorkoutDataStore> workouts, ParseException e) {
+                 if (e == null) {
+                	 for (WorkoutDataStore workout : workouts){
+                		 workout.pinInBackground();
+                	 }
+                 }else{
+
+                 }   
+            }
+        });
 	}
 }
