@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
 import com.google.gson.Gson;
 import com.parse.LogInCallback;
 import com.parse.ParseAnonymousUtils;
@@ -13,11 +12,10 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-=======
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
->>>>>>> 1e846774d35fa5cc5253bc3585026881331a6e30
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -25,13 +23,13 @@ import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBarActivity;
-<<<<<<< HEAD
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-=======
->>>>>>> 1e846774d35fa5cc5253bc3585026881331a6e30
+
+
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -153,7 +151,6 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements
 		startActivity(i);
 		finish();
 	}
-<<<<<<< HEAD
 	
 
 	private void saveDateToDatastore(Workout workout){
@@ -197,13 +194,8 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements
 	 
 	}
 	
-	private void saveDataToFile(){
-		
-=======
-
 	private void saveDataToFile() {
 
->>>>>>> 1e846774d35fa5cc5253bc3585026881331a6e30
 		Gson gson = new Gson();
 		String file = "data_workout";
 		String csv = "/mnt/sdcard/myfile.csv";
