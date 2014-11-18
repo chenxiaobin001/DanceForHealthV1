@@ -1,11 +1,13 @@
 package com.example.danceforhealth;
 
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.Gson;
-
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -13,34 +15,37 @@ import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBarActivity;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicator{
+import com.google.gson.Gson;
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.BeanToCsv;
+import com.opencsv.bean.ColumnPositionMappingStrategy;
+
+public class NewWorkoutPageSwipe extends ActionBarActivity implements
+		Communicator {
 	private ViewPager viewPager = null;
 	private PagerTitleStrip titleStrip = null;
 	private MyAdapter myAdapter = null;
 	private Workout workout = null;
 	PrevWorkout preWorkout = PrevWorkout.getInstance();
 	List<Workout> workouts = preWorkout.getPrevious();
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_workout_page_swipe);
 		Bundle extras = getIntent().getExtras();
- 		if (extras != null) {
- 			workout = (Workout) extras.get("workout");
- 		}
- 		
- 		getActionBar().setTitle("Workout form");  
-		viewPager = (ViewPager) findViewById(R.id.pager);	
+		if (extras != null) {
+			workout = (Workout) extras.get("workout");
+		}
+
+		getActionBar().setTitle("Workout form");
+		viewPager = (ViewPager) findViewById(R.id.pager);
 		titleStrip = (PagerTitleStrip) findViewById(R.id.titleStrip);
 		titleStrip.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
 		titleStrip.setTextColor(Color.WHITE);
@@ -48,40 +53,42 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 		myAdapter = new MyAdapter(fragmentManager, workout);
 		viewPager.setAdapter(myAdapter);
 		viewPager.setOnPageChangeListener(pageChangeListener);
-		Toast.makeText(getApplicationContext(), "Swipe to see different pages", Toast.LENGTH_SHORT).show();
+		Toast.makeText(getApplicationContext(), "Swipe to see different pages",
+				Toast.LENGTH_SHORT).show();
 	}
-	
+
 	@Override
-	public void onBackPressed() {    
-	    Intent intent = new Intent();
-	    intent.setClass(this, HomeActivity.class);
-	    startActivity(intent);
-	    finish();
+	public void onBackPressed() {
+		Intent intent = new Intent();
+		intent.setClass(this, HomeActivity.class);
+		startActivity(intent);
+		finish();
 	}
-	
-	private OnPageChangeListener pageChangeListener = new OnPageChangeListener(){
-		
+
+	private OnPageChangeListener pageChangeListener = new OnPageChangeListener() {
+
 		int currentPosition = 0;
+
 		@Override
 		public void onPageScrollStateChanged(int arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void onPageScrolled(int arg0, float arg1, int arg2) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void onPageSelected(int arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
-		
+
 	};
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -100,14 +107,14 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	
+
 	@Override
-	public void collectData(Workout workout){
-		
+	public void collectData(Workout workout) {
+
 		workout = new Workout();
-		for (int i = 0; i < myAdapter.getCount(); i++){
-			FragmentDataCollection fragment = (FragmentDataCollection)myAdapter.getItem(i);
+		for (int i = 0; i < myAdapter.getCount(); i++) {
+			FragmentDataCollection fragment = (FragmentDataCollection) myAdapter
+					.getItem(i);
 			fragment.updateWorkoutInfo(workout);
 		}
 		workouts.add(workout);
@@ -120,36 +127,49 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 		startActivity(intent);
 		finish();
 	}
+
 	@Override
 	public void cancelWorkoutData() {
-		
+
 		Intent i = new Intent(this, HomeActivity.class);
 		startActivity(i);
 		finish();
 	}
-	private void saveDataToFile(){
-		
+
+	private void saveDataToFile() {
+
 		Gson gson = new Gson();
 		String file = "data_workout";
-	
-	      try {
-	         FileOutputStream fOut = openFileOutput(file,MODE_WORLD_WRITEABLE);
-	         String data = "";
-	         for (Workout w : workouts){
-	        	 data += gson.toJson(w); 
-	        	 data += "\n";
-	         }
-	         fOut.write(data.getBytes());
-	         fOut.close();
-	      } catch (Exception e) {
-	         e.printStackTrace();
-	      }
+		String csv = "/mnt/sdcard/myfile.csv";
+
+		try {
+			CSVWriter writer = new CSVWriter(new FileWriter(csv), ',');
+			String[] header = { "Type", "Date", "Duration", "HeartRate",
+					"Steps", "Stain" };
+			writer.writeNext(header);
+			FileOutputStream fOut = openFileOutput(file, MODE_WORLD_WRITEABLE);
+			String data = "";
+			for (Workout w : workouts) {
+				data += gson.toJson(w);
+				data += "\n";
+				String[] entries = { w.getType(), w.getDate(),
+						w.getWorkoutTime(), "" + w.getHR(), "" + w.getSteps(),
+						"" + w.getStrain() };
+				writer.writeNext(entries);
+			}
+			fOut.write(data.getBytes());
+			fOut.close();
+			writer.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	class MyAdapter extends FragmentStatePagerAdapter{
-		
+	class MyAdapter extends FragmentStatePagerAdapter {
+
 		private List<Fragment> fragments;
-		
+
 		public MyAdapter(FragmentManager fm, Workout workout) {
 			super(fm);
 			this.fragments = new ArrayList<Fragment>();
@@ -157,7 +177,7 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 			fragments.add(new FragmentWeightAndStep());
 			fragments.add(new FragmentHeartRate());
 			fragments.add(new FragmentTimeAndSubmit());
-			for (int i = 0; i < fragments.size(); i++){
+			for (int i = 0; i < fragments.size(); i++) {
 				Fragment f = fragments.get(i);
 				Bundle bundle = new Bundle();
 				bundle.putParcelable("workout_info", workout);
@@ -167,7 +187,7 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 
 		@Override
 		public Fragment getItem(int position) {
-	
+
 			return fragments.get(position);
 
 		}
@@ -177,33 +197,30 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 			// TODO Auto-generated method stub
 			return 4;
 		}
-		
+
 		@Override
-		public CharSequence getPageTitle(int position){
+		public CharSequence getPageTitle(int position) {
 			String title = new String();
-			switch (position){
-				case 0: {
-					title = "Type/Feel";
-					break;
-				}
-				case 1: {
-					title = "Weight/Step";
-					break;
-				}
-				case 2:{
-					title = "HeartRate";
-					break;
-				}
-				case 3:{
-					title = "Date&Time";
-				}
+			switch (position) {
+			case 0: {
+				title = "Type/Feel";
+				break;
+			}
+			case 1: {
+				title = "Weight/Step";
+				break;
+			}
+			case 2: {
+				title = "HeartRate";
+				break;
+			}
+			case 3: {
+				title = "Date&Time";
+			}
 			}
 			return title;
 		}
-		
-		
+
 	}
 
-	
 }
-
