@@ -13,11 +13,12 @@ public class DanceForHealthApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Parse.enableLocalDatastore(this); 
+        ParseObject.registerSubclass(WorkoutDataStore.class);
         Parse.initialize(this, getString(R.string.app_id), getString(R.string.client_id));
  
         ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
-        ParseObject.registerSubclass(WorkoutDataStore.class);
+        
         // If you would like all objects to be private by default, remove this
         // line.
         defaultACL.setPublicReadAccess(true);

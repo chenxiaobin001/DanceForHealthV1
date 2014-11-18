@@ -135,6 +135,7 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 		finish();
 	}
 	
+
 	private void saveDateToDatastore(Workout workout){
 		
 		ParseUser user = ParseUser.getCurrentUser();
@@ -153,7 +154,6 @@ public class NewWorkoutPageSwipe extends ActionBarActivity implements Communicat
 		wds.setDay(workout.getDay());
 		wds.setWorkoutDate(workout.getDate());
 		wds.setWorkoutTime(workout.getWorkoutTime());
-		wds.saveInBackground();
 		wds.pinInBackground( new SaveCallback( ) {
 	        @Override
 	        public void done( ParseException e ) {

@@ -3,7 +3,7 @@ package com.example.danceforhealth;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
-@ParseClassName("WorkoutInfo")
+@ParseClassName("WorkoutDataStore")
 public class WorkoutDataStore extends ParseObject {
 	public WorkoutDataStore(){
 		
@@ -59,8 +59,8 @@ public class WorkoutDataStore extends ParseObject {
 		put("Weight", weight);
 	}
 	
-	public String getWorkingTime() {
-		return getString("WorkingTime");
+	public int getWorkingTime() {
+		return getInt("WorkingTime");
 	}
 	
 	public void setWorkingTime(int minutes) {
@@ -125,12 +125,24 @@ public class WorkoutDataStore extends ParseObject {
 	}
 	
 	
+	public Workout toWorkoutObject(){
+		
+		Workout workout = new Workout();
+		workout.setDay(getDay());
+		workout.setFunIndex(getFunIndex());
+		workout.setHeartrate(getHeartRate());
+		workout.setLikedIndex(getLikedIndex());
+		workout.setSteps(getSteps());
+		workout.setStrain(getStrain());
+		workout.setTime(getWorkingTime());
+		workout.setTiredIndex(getTiredIndex());
+		workout.setType(getType());
+		workout.setWeek(getWeek());
+		workout.setWeight(getWeight());
+		workout.setWorkoutDate(getWorkoutDate());
+		workout.setWorkoutTime(getWorkoutTime());
+		return workout;
+	}
 
-	
-
-	
-	
-
-	
 	
 }

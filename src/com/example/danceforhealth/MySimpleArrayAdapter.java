@@ -1,5 +1,7 @@
 package com.example.danceforhealth;
 
+import java.util.List;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +12,9 @@ import android.widget.TextView;
 
 public class MySimpleArrayAdapter extends ArrayAdapter<Workout> {
 	private final Context context;
-	private final Workout[] values;
+	private final List<Workout> values;
 
-	public MySimpleArrayAdapter(Context context, Workout[] values) {
+	public MySimpleArrayAdapter(Context context, List<Workout> values) {
 		super(context, R.layout.row_data, values);
 		this.context = context;
 		this.values = values;
@@ -28,10 +30,10 @@ public class MySimpleArrayAdapter extends ArrayAdapter<Workout> {
 		ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
 		
 		
-		textView.setText(values[position].getDate());
-		type.setText(values[position].getType());
-		setImageIcon(values[position], imageView);
-		int feeling = values[position].getStrain();
+		textView.setText(values.get(position).getDate());
+		type.setText(values.get(position).getType());
+		setImageIcon(values.get(position), imageView);
+		int feeling = values.get(position).getStrain();
 
 		return rowView;
 	}
