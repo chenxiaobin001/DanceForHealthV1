@@ -1,5 +1,6 @@
 package com.example.danceforhealth;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.parse.FindCallback;
@@ -138,7 +139,11 @@ public class LoginDialog extends DialogFragment{
 			
 			@Override
 			public void onClick(View view) {
-				ParseFacebookUtils.logIn(parent, new LogInCallback() {
+				List<String> permissions = Arrays.asList("public_profile", "user_friends", "user_about_me",
+			            "user_relationships", "user_birthday", "user_location");
+				
+				ParseFacebookUtils.logIn(permissions, parent, new LogInCallback() {
+					
 					  @Override
 					  public void done(ParseUser user, ParseException err) {
 					    if (user == null) {
