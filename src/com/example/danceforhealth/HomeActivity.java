@@ -102,6 +102,9 @@ public class HomeActivity extends Activity {
 
 package com.example.danceforhealth;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseAnonymousUtils;
@@ -112,6 +115,10 @@ import com.parse.ParseException;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -119,6 +126,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -214,9 +222,33 @@ public class HomeActivity extends ActionBarActivity {
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
+		
+		// VxTTguk8Dq7tZ0h1GC6gxPSabh0=
+
+/*		PackageInfo info;
+		try {
+		    info = getPackageManager().getPackageInfo("com.example.danceforhealth", PackageManager.GET_SIGNATURES);
+		    for (Signature signature : info.signatures) {
+		        MessageDigest md;
+		        md = MessageDigest.getInstance("SHA");
+		        md.update(signature.toByteArray());
+		        String something = new String(Base64.encode(md.digest(), 0));
+		        //String something = new String(Base64.encodeBytes(md.digest()));
+		        Log.e("hash key", something);
+		    }
+		} catch (NameNotFoundException e1) {
+		    Log.e("name not found", e1.toString());
+		} catch (NoSuchAlgorithmException e) {
+		    Log.e("no such an algorithm", e.toString());
+		} catch (Exception e) {
+		    Log.e("exception", e.toString());
+		}*/
+		
+
 		updateState();
 		setAchievement();
 //		createAnonimousUser();
+		
 	}
 	
 
@@ -437,6 +469,8 @@ public class HomeActivity extends ActionBarActivity {
 			break;
 		}
 	}
+	
+	
 	
 class MyAdatper extends BaseAdapter{
 		

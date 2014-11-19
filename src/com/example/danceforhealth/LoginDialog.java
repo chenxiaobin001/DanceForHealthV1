@@ -148,6 +148,10 @@ public class LoginDialog extends DialogFragment{
 					  public void done(ParseUser user, ParseException err) {
 					    if (user == null) {
 					      Log.v("1", "2");
+					      if (user == null) {
+					          Toast.makeText(parent.getApplicationContext(), err.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+					          Log.v("1", err.getLocalizedMessage());
+					    }
 					    } else if (user.isNew()) {
 					    	Log.v("1", "Signed up and logged in through Facebook!");
 					    	Toast.makeText(parent.getApplicationContext(), "Signed up and logged in through Facebook!", Toast.LENGTH_SHORT).show();
