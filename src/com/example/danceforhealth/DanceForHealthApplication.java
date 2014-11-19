@@ -2,6 +2,7 @@ package com.example.danceforhealth;
 
 import com.parse.Parse;
 import com.parse.ParseACL;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -14,8 +15,9 @@ public class DanceForHealthApplication extends Application {
         super.onCreate();
         Parse.enableLocalDatastore(this); 
         ParseObject.registerSubclass(WorkoutDataStore.class);
+        
         Parse.initialize(this, getString(R.string.app_id), getString(R.string.client_id));
- 
+        ParseFacebookUtils.initialize(getString(R.string.facebook_app_id));
         ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
         

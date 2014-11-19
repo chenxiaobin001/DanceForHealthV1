@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.parse.FindCallback;
 import com.parse.LogInCallback;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.ParseException;
@@ -14,9 +15,11 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnShowListener;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +32,7 @@ public class LoginDialog extends DialogFragment{
 	
 	private EditText username;
 	private EditText password;
+	private Button facebookBtn;
 	private View view;
 	private Dialog mDialog;
 	private Activity parent;
@@ -43,6 +47,7 @@ public class LoginDialog extends DialogFragment{
 		this.view = view;
 		username = (EditText) view.findViewById(R.id.usernameEditText);
 		password = (EditText) view.findViewById(R.id.passwordEditText);
+		facebookBtn = (Button) view.findViewById(R.id.facebookBtn);
 		builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 			
 			@Override
@@ -59,7 +64,8 @@ public class LoginDialog extends DialogFragment{
 				login();
 			}
 		});
-	
+		
+		
 		builder.setView(view);
 		Dialog dialog = builder.create();
 		mDialog = dialog;
@@ -128,8 +134,46 @@ public class LoginDialog extends DialogFragment{
 			}
 		});
 		
+		facebookBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				ParseFacebookUtils.logIn(parent, new LogInCallback() {
+					  @Override
+					  public void done(ParseUser user, ParseException err) {
+					    if (user == null) {
+					      Log.v("1", "2");
+					    } else if (user.isNew()) {
+					    	Log.v("1", "Signed up and logged in through Facebook!");
+					    	Toast.makeText(parent.getApplicationContext(), "Signed up and logged in through Facebook!", Toast.LENGTH_SHORT).show();
+					    } else {
+					    	Log.v("1", "Logged in through Facebook!");
+					    	Toast.makeText(parent.getApplicationContext(), "Logged in through Facebook!", Toast.LENGTH_SHORT).show();
+					    	retriveCloudData(user);
+					    }
+					    mDialog.dismiss();
+					  }
+					});
+				
+			}
+		});
+		
 		return dialog;
 	}	
+	
+	
+	@Override
+    public void onStart()
+    {
+        super.onStart();
+        Button pButton =  ((AlertDialog) getDialog()).getButton(DialogInterface.BUTTON_POSITIVE);
+        Button nButton =  ((AlertDialog) getDialog()).getButton(DialogInterface.BUTTON_NEGATIVE);
+
+        pButton.setBackground(getResources().getDrawable(R.drawable.apptheme_btn_default_holo_light));
+        nButton.setBackground(getResources().getDrawable(R.drawable.apptheme_btn_default_holo_light));
+        pButton.setTextColor(Color.WHITE);
+        nButton.setTextColor(Color.WHITE);
+    }
 	
 	private boolean usernameOrPasswordEmpty(){
 		username = (EditText) view.findViewById(R.id.usernameEditText);

@@ -105,6 +105,7 @@ package com.example.danceforhealth;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseAnonymousUtils;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 import com.parse.ParseException;
 
@@ -219,6 +220,12 @@ public class HomeActivity extends ActionBarActivity {
 	}
 	
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	  super.onActivityResult(requestCode, resultCode, data);
+	  ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
+	}
+	
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState){
 		super.onPostCreate(savedInstanceState);
